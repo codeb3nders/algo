@@ -9,15 +9,10 @@ import * as bodyParser from 'body-parser';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   const configService = app.get(ConfigService);
-  console.log(
-    '---------------------------------------------------------------'
-  );
-  console.log(
-    '====================================',
-    configService.get('PORT')
-  );
-  const port = configService.get('PORT');
 
+  const port = configService.get('PORT');
+  const globalPrefix = 'api';
+  app.setGlobalPrefix(globalPrefix);
   app.use(bodyParser.json({ limit: '50mb' }));
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
@@ -29,6 +24,6 @@ async function bootstrap() {
     })
   );
 
-  await app.listen(port);
+  await app.listen(port || 3000);
 }
 bootstrap();

@@ -12,7 +12,6 @@ import { SalesModule } from './sales/sales.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: './.env',
     }),
     MongooseModule.forRoot('mongodb://localhost/algo_pos'),
     AccountModule,
